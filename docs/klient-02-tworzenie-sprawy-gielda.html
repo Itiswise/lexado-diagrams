@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tworzenie sprawy przez giełdę - Lexado</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+
+        .header-content h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .role-klient {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .role-prawnik {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .role-admin {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .diagram-container {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+
+        .mermaid {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .diagram-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Powrót do listy</a>
+            <div class="header-content">
+                <h1>Tworzenie sprawy przez giełdę</h1>
+                <span class="role-badge role-klient">KLIENT</span>
+            </div>
+        </header>
+
+        <div class="diagram-container">
+            <pre class="mermaid">
+
+flowchart TD
+    Start([Pulpit klienta]) --> A[Kliknięcie 'Utwórz sprawę']
+    A --> B[Wybór kategorii prawa]
+    B --> C[Dynamiczny formularz OrderForm<br/>dostosowany do kategorii]
+
+    C --> D[Wypełnienie szczegółów:<br/>- Opis sprawy<br/>- Lokalizacja<br/>- Priorytet<br/>- Język obsługi<br/>- Dokumenty opcjonalnie]
+
+    D --> E[Zatwierdzenie formularza]
+    E --> F[Zapisanie sprawy<br/>Status: PENDING]
+
+    F --> G{Moderacja<br/>administratora}
+    G -->|Odrzucona| H[Status: REJECTED<br/>Powiadomienie z powodem]
+    G -->|Zaakceptowana| I[Status: PUBLISHED<br/>Widoczna na giełdzie]
+
+    H --> End1([Sprawa odrzucona])
+    I --> J[Prawicy składają oferty<br/>Typ: FROM_LAWYER]
+
+    J --> K[Otrzymanie powiadomień<br/>o nowych ofertach]
+    K --> L[Przegląd i porównanie ofert:<br/>wycena, terminy, kwalifikacje]
+
+    L --> M{Wybór oferty}
+    M -->|Akceptacja| N[Status: IN_PROGRESS<br/>Prawnik przypisany]
+    M -->|Odrzucenie/Wygaśnięcie| J
+
+    N --> End2([Współpraca rozpoczęta])
+
+    style Start fill:#90EE90
+    style End1 fill:#FFB6C1
+    style End2 fill:#90EE90
+    style G fill:#FFE4B5
+    style M fill:#FFE4B5
+            </pre>
+        </div>
+
+        <footer>
+            <p><strong>Lexado</strong> - Platforma łącząca klientów z prawnikami</p>
+        </footer>
+    </div>
+</body>
+</html>

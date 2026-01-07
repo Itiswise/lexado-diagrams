@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bezpośrednie zapytanie do prawnika - Lexado</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+
+        .header-content h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .role-klient {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .role-prawnik {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .role-admin {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .diagram-container {
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+
+        .mermaid {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .diagram-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button">← Powrót do listy</a>
+            <div class="header-content">
+                <h1>Bezpośrednie zapytanie do prawnika</h1>
+                <span class="role-badge role-klient">KLIENT</span>
+            </div>
+        </header>
+
+        <div class="diagram-container">
+            <pre class="mermaid">
+
+flowchart TD
+    Start([Katalog /lawyers]) --> A[Filtrowanie prawników:<br/>- Specjalizacja<br/>- Lokalizacja<br/>- Języki<br/>- Oceny]
+
+    A --> B[Wyświetlenie listy<br/>dopasowanych prawników]
+    B --> C[Wybór prawnika<br/>Kliknięcie na profil]
+
+    C --> D[Przegląd profilu /lawyers/slug:<br/>- Dane zawodowe wpis, okręg<br/>- Specjalizacje<br/>- Biografia<br/>- Oceny i opinie klientów]
+
+    D --> E{Wysłać zapytanie?}
+    E -->|Nie| F[Powrót do katalogu]
+    F --> B
+
+    E -->|Tak| G[Kliknięcie 'Wyślij zapytanie']
+    G --> H[Formularz sprawy<br/>/lawyers/slug/apply]
+
+    H --> I[Wypełnienie szczegółów<br/>analogicznie do giełdy]
+    I --> J[Utworzenie sprawy<br/>Status: PRIVATE]
+
+    J --> K[Utworzenie oferty<br/>Typ: TO_LAWYER]
+    K --> L[Prawnik otrzymuje powiadomienie]
+
+    L --> M{Odpowiedź prawnika}
+    M -->|Akceptuje| N([Współpraca IN_PROGRESS])
+    M -->|Odrzuca| O([Zapytanie odrzucone])
+
+    style Start fill:#90EE90
+    style N fill:#90EE90
+    style O fill:#FFB6C1
+    style E fill:#FFE4B5
+    style M fill:#FFE4B5
+            </pre>
+        </div>
+
+        <footer>
+            <p><strong>Lexado</strong> - Platforma łącząca klientów z prawnikami</p>
+        </footer>
+    </div>
+</body>
+</html>
