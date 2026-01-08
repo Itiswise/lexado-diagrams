@@ -147,38 +147,34 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
     Start([Pulpit klienta]) --> A[Kliknięcie 'Utwórz sprawę']
-    A --> B[Wybór kategorii prawa]
-    B --> C[Dynamiczny formularz OrderForm<br/>dostosowany do kategorii]
-
-    C --> D[Wypełnienie szczegółów:<br/>- Opis sprawy<br/>- Lokalizacja<br/>- Priorytet<br/>- Język obsługi<br/>- Dokumenty opcjonalnie]
-
-    D --> E[Zatwierdzenie formularza]
-    E --> F[Zapisanie sprawy<br/>Status: PENDING]
-
-    F --> G{Moderacja<br/>administratora}
-    G -->|Odrzucona| H[Status: REJECTED<br/>Powiadomienie z powodem]
-    G -->|Zaakceptowana| I[Status: PUBLISHED<br/>Widoczna na giełdzie]
-
-    H --> End1([Sprawa odrzucona])
-    I --> J[Prawicy składają oferty<br/>Typ: FROM_LAWYER]
-
-    J --> K[Otrzymanie powiadomień<br/>o nowych ofertach]
-    K --> L[Przegląd i porównanie ofert:<br/>wycena, terminy, kwalifikacje]
-
-    L --> M{Wybór oferty}
-    M -->|Akceptacja| N[Status: IN_PROGRESS<br/>Prawnik przypisany]
-    M -->|Odrzucenie/Wygaśnięcie| J
-
-    N --> End2([Współpraca rozpoczęta])
-
+    A --> B[Wybór lokalizacji]
+    B --> C[Wybór kategorii prawa]
+    C --> D[Dynamiczny formularz OrderForm<br/>dostosowany do kategorii]
+    D --> E[Wypełnienie szczegółów:<br/>- Opis sprawy<br/>- Priorytet<br/>- Język obsługi<br/>- Data rozpoczęcia<br/>- Dokumenty opcjonalnie]
+    E --> F[Zatwierdzenie formularza]
+    F --> G{Kategoria?}
+    G -->|Prawo karne| H[Zapisanie sprawy<br/>Status: PUBLISHED<br/>Moderacja pominięta]
+    G -->|Inne kategorie| I[Zapisanie sprawy<br/>Status: PENDING]
+    H --> J[Prawnicy składają oferty<br/>Typ: FROM_LAWYER]
+    I --> K{Moderacja<br/>administratora}
+    K -->|Odrzucona| L[Status: REJECTED<br/>Powiadomienie]
+    K -->|Zaakceptowana| M[Status: PUBLISHED]
+    L --> N[Możliwość edycji<br/>i ponownego wysłania]
+    N --> D
+    M --> J
+    J --> O[Otrzymanie powiadomień<br/>o nowych ofertach]
+    O --> P[Przegląd i porównanie ofert:<br/>wycena, terminy, kwalifikacje]
+    P --> Q{Wybór oferty}
+    Q -->|Akceptacja| R[Status: IN_PROGRESS<br/>Prawnik przypisany]
+    Q -->|Odrzucenie/Wygaśnięcie| J
+    R --> End2([Współpraca rozpoczęta])
     style Start fill:#90EE90
-    style End1 fill:#FFB6C1
     style End2 fill:#90EE90
     style G fill:#FFE4B5
-    style M fill:#FFE4B5
+    style K fill:#FFE4B5
+    style Q fill:#FFE4B5
             </pre>
         </div>
 

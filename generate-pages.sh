@@ -197,8 +197,7 @@ generate_html "$SOURCE_DIR/administrator/02-moderacja-opinii.mmd" "$OUTPUT_DIR/a
 generate_html "$SOURCE_DIR/administrator/03-weryfikacja-prawnikow.mmd" "$OUTPUT_DIR/administrator-03-weryfikacja-prawnikow.html" "Weryfikacja nowych prawników" "ADMINISTRATOR"
 generate_html "$SOURCE_DIR/administrator/04-zarzadzanie-uzytkownikami.mmd" "$OUTPUT_DIR/administrator-04-zarzadzanie-uzytkownikami.html" "Zarządzanie użytkownikami" "ADMINISTRATOR"
 generate_html "$SOURCE_DIR/administrator/05-zarzadzanie-trescia.mmd" "$OUTPUT_DIR/administrator-05-zarzadzanie-trescia.html" "Zarządzanie treścią CMS" "ADMINISTRATOR"
-generate_html "$SOURCE_DIR/administrator/06-monitorowanie-audyt.mmd" "$OUTPUT_DIR/administrator-06-monitorowanie-audyt.html" "Monitorowanie i audyt" "ADMINISTRATOR"
 generate_html "$SOURCE_DIR/administrator/07-konfiguracja-ustawien.mmd" "$OUTPUT_DIR/administrator-07-konfiguracja-ustawien.html" "Konfiguracja ustawień" "ADMINISTRATOR"
 
-echo "✅ Wygenerowano wszystkie 16 stron HTML!"
+echo "✅ Wygenerowano wszystkie 15 stron HTML!"
 echo "📂 Lokalizacja: $OUTPUT_DIR"

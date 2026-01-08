@@ -1,0 +1,24 @@
+flowchart TD
+    Start([Panel /admin<br/>Sekcja 'Treść']) --> A{Rodzaj treści?}
+    A -->|Strony statyczne| B[Kliknięcie 'Strony'<br/>PageResource]
+    A -->|Wpisy blogowe| C[Kliknięcie 'Wpisy'<br/>PostResource]
+    B --> D[Wyświetlenie listy stron:<br/>'O nas', 'Regulamin',<br/>'FAQ', 'Kontakt']
+    D --> E[Edycja istniejącej strony]
+    E --> F[Modyfikacja treści<br/>w edytorze blokowym]
+    F --> G[Zapisanie zmian]
+    G --> End2([Strona zaktualizowana])
+    C --> N[Wyświetlenie listy<br/>wpisów blogowych]
+    N --> O{Akcja na wpisach?}
+    O -->|Utworzenie nowego| P[Create Post<br/>Formularz nowego wpisu]
+    P --> Q[Wypełnienie:<br/>- Tytuł wpisu<br/>- Slug URL<br/>- Treść edytor blokowy<br/>- Typ NEWS/TUTORIAL<br/>- Autor<br/>- Obrazek wyróżniający<br/>- Meta description<br/>- Tagi/słowa kluczowe]
+    Q --> R[Zapisanie wpisu]
+    R --> End4([Wpis opublikowany])
+    O -->|Edycja wpisu| S[Otwarcie wpisu<br/>Modyfikacja]
+    S --> T[Zapisanie zmian]
+    T --> End5([Wpis zaktualizowany])
+    style Start fill:#90EE90
+    style End2 fill:#90EE90
+    style End4 fill:#90EE90
+    style End5 fill:#90EE90
+    style A fill:#FFE4B5
+    style O fill:#FFE4B5

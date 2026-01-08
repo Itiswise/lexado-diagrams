@@ -147,37 +147,44 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
-    Start([Katalog /lawyers]) --> A[Filtrowanie prawników:<br/>- Specjalizacja<br/>- Lokalizacja<br/>- Języki<br/>- Oceny]
+    Start([Dwie ścieżki]) --> A{Wybór metody}
 
-    A --> B[Wyświetlenie listy<br/>dopasowanych prawników]
-    B --> C[Wybór prawnika<br/>Kliknięcie na profil]
-
-    C --> D[Przegląd profilu /lawyers/slug:<br/>- Dane zawodowe wpis, okręg<br/>- Specjalizacje<br/>- Biografia<br/>- Oceny i opinie klientów]
-
-    D --> E{Wysłać zapytanie?}
-    E -->|Nie| F[Powrót do katalogu]
-    F --> B
-
-    E -->|Tak| G[Kliknięcie 'Wyślij zapytanie']
+    A -->|Ścieżka 1:<br/>Nowa sprawa| B[Katalog /lawyers]
+    B --> C[Filtrowanie prawników:<br/>- Specjalizacja<br/>- Lokalizacja<br/>- Języki<br/>- Oceny]
+    C --> D[Wyświetlenie listy<br/>dopasowanych prawników]
+    D --> E[Wybór prawnika<br/>Kliknięcie na profil]
+    E --> F[Przegląd profilu /lawyers/slug:<br/>- Dane zawodowe<br/>- Specjalizacje<br/>- Biografia<br/>- Oceny i opinie]
+    F --> G[Kliknięcie 'Wyślij zapytanie']
     G --> H[Formularz sprawy<br/>/lawyers/slug/apply]
-
     H --> I[Wypełnienie szczegółów<br/>analogicznie do giełdy]
     I --> J[Utworzenie sprawy<br/>Status: PRIVATE]
-
     J --> K[Utworzenie oferty<br/>Typ: TO_LAWYER]
-    K --> L[Prawnik otrzymuje powiadomienie]
 
-    L --> M{Odpowiedź prawnika}
-    M -->|Akceptuje| N([Współpraca IN_PROGRESS])
-    M -->|Odrzuca| O([Zapytanie odrzucone])
+    A -->|Ścieżka 2:<br/>Istniejąca sprawa| L[Widok sprawy /orders/order]
+    L --> M{Status sprawy?}
+    M -->|IN_PROGRESS lub<br/>ARCHIVED/CANCELLED| N([Brak możliwości wysłania])
+    M -->|PENDING/PUBLISHED/<br/>PRIVATE| O[Kliknięcie 'Opcje'<br/>-> 'Wyślij do prawnika']
+    O --> P[Drawer z listą prawników<br/>LawyersSelectDrawer]
+    P --> Q[Filtrowanie prawników:<br/>- Kategorie<br/>- Specjalizacje<br/>- Miasto]
+    Q --> R[Wybór jednego lub<br/>wielu prawników]
+    R --> S[Kliknięcie 'Wyślij']
+    S --> T[SendOrderToLawyersAction<br/>Utworzenie ofert TO_LAWYER]
+    T --> K
+
+    K --> U[Prawnik otrzymuje powiadomienie]
+    U --> V{Odpowiedź prawnika}
+    V -->|Wystawia ofertę| W[Prawnik składa ofertę<br/>z wyceną i terminami]
+    V -->|Odrzuca| X([Zapytanie odrzucone])
+    W --> Y([Klient otrzymuje ofertę<br/>do akceptacji])
 
     style Start fill:#90EE90
-    style N fill:#90EE90
-    style O fill:#FFB6C1
-    style E fill:#FFE4B5
+    style Y fill:#90EE90
+    style N fill:#FFB6C1
+    style X fill:#FFB6C1
+    style A fill:#FFE4B5
     style M fill:#FFE4B5
+    style V fill:#FFE4B5
             </pre>
         </div>
 

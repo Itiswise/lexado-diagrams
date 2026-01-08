@@ -1,0 +1,23 @@
+flowchart TD
+    Start([Panel /admin/reviews]) --> A[Filtrowanie według statusu<br/>PENDING]
+    A --> B[System wyświetla listę<br/>nowych opinii]
+    B --> C[Administrator wybiera<br/>opinię do przeglądu]
+    C --> D[Otwarcie szczegółów opinii]
+    D --> E[Przegląd zawartości:<br/>- Ocena gwiazdki 1-5<br/>- Treść pisemnej opinii<br/>- Powiązana sprawa<br/>- Data utworzenia]
+    E --> F[Sprawdzenie treści<br/>zgodność z regulaminem]
+    F --> G{Decyzja<br/>moderacyjna}
+    G -->|Zaakceptowana| H[Administrator zatwierdza opinię]
+    H --> I[Zmiana statusu<br/>na APPROVED]
+    I --> J[Opinia pojawia się publicznie<br/>w profilu prawnika]
+    J --> K[System automatycznie<br/>aktualizuje średnią ocen<br/>LawyerDetailsService]
+    K --> L[Prawnik otrzymuje powiadomienie<br/>o nowej opinii]
+    L --> End1([Opinia zaakceptowana<br/>i opublikowana])
+    G -->|Odrzucona| M[Administrator odrzuca opinię]
+    M --> N[Zmiana statusu<br/>na REJECTED]
+    N --> O[Opinia NIE pojawia się<br/>publicznie]
+    O --> P[Opinia pozostaje<br/>w systemie jako REJECTED]
+    P --> End2([Opinia odrzucona<br/>nie publikowana])
+    style Start fill:#90EE90
+    style End1 fill:#90EE90
+    style End2 fill:#FFB6C1
+    style G fill:#FFE4B5

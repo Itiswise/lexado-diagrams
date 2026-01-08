@@ -1,0 +1,22 @@
+flowchart TD
+    Start([Katalog /lawyers]) --> A[Filtrowanie prawników:<br/>- Specjalizacja<br/>- Lokalizacja<br/>- Języki<br/>- Oceny]
+    A --> B[Wyświetlenie listy<br/>dopasowanych prawników]
+    B --> C[Wybór prawnika<br/>Kliknięcie na profil]
+    C --> D[Przegląd profilu /lawyers/slug:<br/>- Dane zawodowe wpis, okręg<br/>- Specjalizacje<br/>- Biografia<br/>- Oceny i opinie klientów]
+    D --> E{Wysłać zapytanie?}
+    E -->|Nie| F[Powrót do katalogu]
+    F --> B
+    E -->|Tak| G[Kliknięcie 'Wyślij zapytanie']
+    G --> H[Formularz sprawy<br/>/lawyers/slug/apply]
+    H --> I[Wypełnienie szczegółów<br/>analogicznie do giełdy]
+    I --> J[Utworzenie sprawy<br/>Status: PRIVATE]
+    J --> K[Utworzenie oferty<br/>Typ: TO_LAWYER]
+    K --> L[Prawnik otrzymuje powiadomienie]
+    L --> M{Odpowiedź prawnika}
+    M -->|Akceptuje| N([Współpraca IN_PROGRESS])
+    M -->|Odrzuca| O([Zapytanie odrzucone])
+    style Start fill:#90EE90
+    style N fill:#90EE90
+    style O fill:#FFB6C1
+    style E fill:#FFE4B5
+    style M fill:#FFE4B5

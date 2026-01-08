@@ -1,0 +1,24 @@
+flowchart TD
+    Start([Klient wysyła zapytanie<br/>/lawyers/slug/apply]) --> A[Prawnik otrzymuje<br/>powiadomienie o zapytaniu]
+    A --> B[System dodaje zapytanie<br/>do ReceivedOrderResource]
+    B --> C[Przejście do<br/>/admin/received-orders]
+    C --> D[Otwarcie zapytania<br/>ViewReceivedOrder]
+    D --> E[Przegląd informacji:<br/>- Opis sprawy<br/>- Kategoria, lokalizacja<br/>- Język, priorytet]
+    E --> F[Analiza czy sprawa pasuje<br/>do kompetencji prawnika]
+    F --> G{Decyzja prawnika}
+    G -->|Odrzucenie| H[Kliknięcie 'Odrzuć zapytanie']
+    H --> I[Dialog z opcjonalnym<br/>powodem odrzucenia]
+    I --> J[Potwierdzenie odrzucenia]
+    J --> K[lawyer_status: REJECTED]
+    K --> L[Klient otrzymuje powiadomienie]
+    L --> End1([Zapytanie odrzucone<br/>Sprawa wraca do klienta])
+    G -->|Akceptacja| M[Kliknięcie 'Akceptuj zapytanie']
+    M --> N[Zmiana statusów:<br/>client_status: ACCEPTED<br/>lawyer_status: ACCEPTED]
+    N --> O[Status sprawy: IN_PROGRESS]
+    O --> P[Prawnik przypisany do sprawy]
+    P --> Q[Klient otrzymuje powiadomienie]
+    Q --> End2([Współpraca rozpoczęta<br/>Dostęp do czatu i narzędzi])
+    style Start fill:#90EE90
+    style End1 fill:#FFB6C1
+    style End2 fill:#90EE90
+    style G fill:#FFE4B5

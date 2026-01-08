@@ -1,0 +1,28 @@
+flowchart TD
+    Start([Sprawa IN_PROGRESS]) --> A[Otwarcie szczegółów sprawy]
+    A --> B[Dostęp do czatu Feed]
+    B --> C[Komunikacja z prawnikiem:<br/>- Wysyłanie wiadomości<br/>- Dodawanie komentarzy wątki<br/>- Wgrywanie/pobieranie dokumentów]
+    C --> D{Wideokonferencja?}
+    D -->|Tak| E[Kliknięcie ikony wideo<br/>/orders/order/chat]
+    D -->|Nie| F[Kontynuacja czatu tekstowego]
+    E --> G[Połączenie WebRTC<br/>Rozmowa audio/wideo]
+    G --> F
+    F --> H[Śledzenie postępu:<br/>- Zadania i terminy Task<br/>- Aktualizacje prawnika]
+    H --> I{Zakończenie sprawy}
+    I -->|Anulowanie| J[Potwierdzenie anulowania<br/>Status: CANCELED]
+    I -->|Pomyślne| K[Zakończenie obsługi]
+    J --> End1([Sprawa anulowana])
+    K --> L[System prosi o opinię]
+    L --> M[Wystawienie oceny:<br/>- 1-5 gwiazdek<br/>- Opinia tekstowa opcjonalnie]
+    M --> N{Moderacja<br/>admina}
+    N -->|Zaakceptowana| O[Opinia opublikowana<br/>Aktualizacja ocen prawnika]
+    N -->|Odrzucona| P[Opinia niewidoczna]
+    O --> Q[Archiwizacja sprawy<br/>Status: ARCHIVED]
+    P --> Q
+    Q --> End2([Sprawa zakończona])
+    style Start fill:#90EE90
+    style End1 fill:#FFB6C1
+    style End2 fill:#90EE90
+    style D fill:#FFE4B5
+    style I fill:#FFE4B5
+    style N fill:#FFE4B5

@@ -1,0 +1,18 @@
+flowchart TD
+    Start([Panel /admin/users]) --> A[System wyświetla listę<br/>wszystkich użytkowników<br/>z wykluczeniem zalogowanego admina]
+    A --> B[Filtrowanie użytkowników:<br/>- Według roli CLIENT/LAWYER/ADMIN<br/>- Według statusu weryfikacji<br/>- Według daty rejestracji]
+    B --> C[Wyszukiwanie użytkownika<br/>po e-mail lub imieniu]
+    C --> D[Administrator wybiera<br/>użytkownika]
+    D --> E[Otwarcie profilu ViewUser<br/>InfolistSchema]
+    E --> F[Przegląd danych:<br/>- Dane osobowe<br/>- Rola i uprawnienia<br/>- Status weryfikacji<br/>- Data utworzenia/modyfikacji<br/>- Subskrypcja jeśli prawnik]
+    F --> G{Wybór akcji}
+    G -->|Edycja subskrypcji| H[Modyfikacja subskrypcji<br/>prawnika]
+    H --> I[Zmiana planu, kategorii,<br/>daty wygaśnięcia]
+    I --> J[Zapisanie zmian]
+    J --> End1([Subskrypcja zaktualizowana])
+    G -->|Historia płatności| K[Przeglądanie historii<br/>płatności prawnika]
+    K --> End2([Historia wyświetlona])
+    style Start fill:#90EE90
+    style End1 fill:#90EE90
+    style End2 fill:#87CEEB
+    style G fill:#FFE4B5

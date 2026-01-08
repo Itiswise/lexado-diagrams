@@ -1,0 +1,18 @@
+flowchart TD
+    Start([Sprawa IN_PROGRESS]) --> A[Przejście do<br/>/admin/received-orders]
+    A --> B[Otwarcie sprawy<br/>ViewReceivedOrder]
+    B --> C[Wyświetlenie pełnego<br/>interfejsu zarządzania]
+    C --> D[Otwarcie feed/osi aktywności]
+    D --> E[Komunikacja z klientem:<br/>- Wysyłanie wiadomości<br/>- Dodawanie komentarzy z wątkami<br/>- Wgrywanie dokumentów<br/>- Pobieranie dokumentów klienta]
+    E --> F{Wideokonferencja?}
+    F -->|Tak| G[Inicjacja połączenia wideo<br/>/orders/order/chat]
+    F -->|Nie| H[Kontynuacja czatu tekstowego]
+    G --> I[Połączenie WebRTC<br/>Kontrola audio/wideo<br/>Konsultacja z klientem]
+    I --> H
+    H --> J[Zarządzanie osią aktywności:<br/>- Dodawanie aktualizacji o postępach<br/>- Komentarze z opisem działań]
+    J --> K[Klient otrzymuje<br/>powiadomienia o aktualizacjach]
+    K --> L[Zarządzanie dokumentacją:<br/>- Wgrywanie umów, pism, dowodów<br/>- Udostępnianie klientowi]
+    L --> End([Współpraca trwa])
+    style Start fill:#90EE90
+    style End fill:#90EE90
+    style F fill:#FFE4B5

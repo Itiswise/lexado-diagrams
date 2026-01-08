@@ -1,0 +1,20 @@
+flowchart TD
+    Start([Strona główna]) --> A[Kliknięcie<br/>'Zarejestruj się jako prawnik']
+    A --> B[Wypełnienie formularza:<br/>imię, nazwisko, e-mail, hasło,<br/>telefon, numer wpisu,<br/>okręg, stanowisko]
+    B --> C[Utworzenie konta<br/>Rola: LAWYER<br/>Generowanie slug]
+    C --> D[Weryfikacja e-mail<br/>Kliknięcie linku]
+    D --> E[Konto oczekuje na<br/>weryfikację administratora<br/>verified_status: PENDING]
+    E --> F{Administrator<br/>weryfikuje dane}
+    F -->|Odrzucony| G[verified_status: REJECTED<br/>Powiadomienie o odrzuceniu]
+    F -->|Zatwierdzony| H[verified_status: VERIFIED<br/>Dostęp odblokowany]
+    G --> End1([Konto odrzucone])
+    H --> I[Dostęp do /admin<br/>Panel administracyjny]
+    I --> J[Przejście do<br/>/admin/lawyer-details]
+    J --> K[Uzupełnienie profilu LawyerDetails:<br/>- Numer wpisu, okręg zablokowane<br/>- Lokalizacje i adres<br/>- Specjalizacje i kategorie prawa<br/>- Języki obsługi<br/>- Biografia zawodowa<br/>- Zdjęcie profilowe]
+    K --> L[Zapisanie profilu<br/>LawyerDetailsService]
+    L --> M[Publikacja wizytówki<br/>Profil widoczny na /lawyers/slug]
+    M --> End2([Profil aktywny i opublikowany])
+    style Start fill:#90EE90
+    style End1 fill:#FFB6C1
+    style End2 fill:#90EE90
+    style F fill:#FFE4B5

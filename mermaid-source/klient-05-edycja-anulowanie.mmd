@@ -1,0 +1,31 @@
+flowchart TD
+    Start([Lista spraw]) --> A{Wybór akcji}
+    A -->|Edycja sprawy| B{Status sprawy?}
+    B -->|IN_PROGRESS<br/>Prawnik przypisany| C[Edycja zablokowana<br/>Komunikacja tylko przez czat]
+    B -->|PENDING/PUBLISHED<br/>Bez prawnika| D[Kliknięcie 'Edytuj'<br/>/orders/order/edit]
+    C --> End1([Brak możliwości edycji])
+    D --> E[Formularz OrderForm<br/>z aktualnymi danymi]
+    E --> F[Modyfikacja przez użytkownika:<br/>- Opis sprawy<br/>- Dokumenty dodaj/usuń<br/>- Priorytet<br/>- Lokalizacja<br/>- Kategoria prawa]
+    F --> G[Zapisanie zmian OrderForm]
+    G --> H[Złożone oferty są<br/>wstrzymywane is_on_hold]
+    H --> I[Powiadomienia do prawników<br/>o zmianie zlecenia]
+    I --> End2([Sprawa zaktualizowana<br/>Pozostaje PUBLISHED])
+    A -->|Anulowanie sprawy| J{Status sprawy?}
+    J -->|PENDING/PUBLISHED| K[Kliknięcie 'Anuluj sprawę']
+    J -->|IN_PROGRESS| L[Kliknięcie 'Anuluj sprawę']
+    K --> M[Potwierdzenie<br/>anulowania]
+    L --> M
+    M --> N[Status: CANCELLED<br/>Usunięcie aktywnych ofert]
+    N --> O[Powiadomienia do prawników]
+    O --> End3([Sprawa anulowana])
+    A -->|Archiwizacja sprawy| P[Kliknięcie 'Archiwizuj']
+    P --> Q[Status: ARCHIVED<br/>Oferty zachowane]
+    Q --> End4([Sprawa zarchiwizowana])
+    style Start fill:#90EE90
+    style End1 fill:#FFB6C1
+    style End2 fill:#90EE90
+    style End3 fill:#FFB6C1
+    style End4 fill:#87CEEB
+    style A fill:#FFE4B5
+    style B fill:#FFE4B5
+    style J fill:#FFE4B5

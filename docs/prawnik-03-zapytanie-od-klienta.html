@@ -147,41 +147,36 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
-    Start([Klient wysyła zapytanie<br/>/lawyers/slug/apply]) --> A[Prawnik otrzymuje<br/>powiadomienie o zapytaniu]
-
+    Start([Klient wysyła zapytanie<br/>TO_LAWYER]) --> A[Prawnik otrzymuje<br/>powiadomienie o zapytaniu]
     A --> B[System dodaje zapytanie<br/>do ReceivedOrderResource]
     B --> C[Przejście do<br/>/admin/received-orders]
-
     C --> D[Otwarcie zapytania<br/>ViewReceivedOrder]
-    D --> E[Przegląd informacji:<br/>- Dane klienta imię, zdjęcie<br/>- Opis sprawy<br/>- Dokumenty załączone<br/>- Kategoria, lokalizacja<br/>- Język, priorytet]
-
+    D --> E[Przegląd informacji:<br/>- Opis sprawy<br/>- Kategoria, lokalizacja<br/>- Język, priorytet]
     E --> F[Analiza czy sprawa pasuje<br/>do kompetencji prawnika]
-
     F --> G{Decyzja prawnika}
-
     G -->|Odrzucenie| H[Kliknięcie 'Odrzuć zapytanie']
     H --> I[Dialog z opcjonalnym<br/>powodem odrzucenia]
-    I --> J[Potwierdzenie odrzucenia]
-
+    I --> J[Potwierdzenie odrzucenia<br/>RejectOfferByLawyerAction]
     J --> K[lawyer_status: REJECTED]
     K --> L[Klient otrzymuje powiadomienie]
-    L --> End1([Zapytanie odrzucone<br/>Sprawa wraca do klienta])
-
-    G -->|Akceptacja| M[Kliknięcie 'Akceptuj zapytanie']
-    M --> N[Zmiana statusów:<br/>client_status: ACCEPTED<br/>lawyer_status: ACCEPTED]
-
-    N --> O[Status sprawy: IN_PROGRESS]
-    O --> P[Prawnik przypisany do sprawy]
-    P --> Q[Klient otrzymuje powiadomienie]
-
-    Q --> End2([Współpraca rozpoczęta<br/>Dostęp do czatu i narzędzi])
-
+    L --> End1([Zapytanie odrzucone])
+    G -->|Zainteresowanie| M[Kliknięcie 'Złóż ofertę']
+    M --> N[Formularz oferty]
+    N --> O[Wypełnienie przez prawnika:<br/>- Szczegółowa wycena WYMAGANA<br/>- Struktura cenowa<br/>- Proponowane terminy<br/>- Dodatkowe informacje<br/>- Data wygaśnięcia oferty]
+    O --> P[SubmitOfferAction<br/>Utworzenie oferty FROM_LAWYER]
+    P --> Q[Zmiana statusów:<br/>client_status: NEW<br/>lawyer_status: SELECTED]
+    Q --> R[Klient otrzymuje powiadomienie<br/>o nowej ofercie]
+    R --> S{Reakcja klienta}
+    S -->|Akceptuje| T[Status sprawy: IN_PROGRESS<br/>Prawnik przypisany]
+    S -->|Odrzuca| U([Oferta odrzucona])
+    T --> End2([Współpraca rozpoczęta])
     style Start fill:#90EE90
     style End1 fill:#FFB6C1
     style End2 fill:#90EE90
+    style U fill:#FFB6C1
     style G fill:#FFE4B5
+    style S fill:#FFE4B5
             </pre>
         </div>
 

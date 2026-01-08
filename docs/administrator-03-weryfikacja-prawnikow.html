@@ -147,46 +147,31 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
     Start([Nowy prawnik<br/>rejestruje się]) --> A[Użytkownik tworzy konto<br/>z rolą LAWYER]
     A --> B[Konto oznaczone jako<br/>oczekujące na weryfikację]
-
     B --> C[System powiadamia<br/>administratora o nowym prawniku]
     C --> D[Administrator otrzymuje<br/>notyfikację]
-
     D --> E[Przejście do /admin/users]
     E --> F[Filtrowanie według<br/>'Prawicy oczekujący na weryfikację']
-
     F --> G[Wyświetlenie listy<br/>niezweryfikowanych prawników]
     G --> H[Administrator wybiera<br/>profil prawnika]
-
     H --> I[Otwarcie profilu ViewUser]
     I --> J[Przegląd danych zawodowych:<br/>- Numer wpisu na listę<br/>- Okręg/izba adwokacka<br/>- Uprawnienia zawodowe]
-
-    J --> K[Sprawdzenie w publicznych<br/>rejestrach:<br/>- Rejestr Adwokatów<br/>- Rejestr Radców Prawnych<br/>- Porównanie danych]
-
-    K --> L{Czy dane<br/>się zgadzają?}
-
+    J --> L{Weryfikacja<br/>danych}
     L -->|Nie| M[Administrator odrzuca wniosek]
     M --> N[Zmiana statusu<br/>na 'Niezweryfikowany']
     N --> O[Konto oznaczone<br/>jako nieaktywne]
-
     O --> P[Prawnik otrzymuje powiadomienie<br/>o odrzuceniu z powodem]
     P --> End1([Konto odrzucone<br/>nieaktywne])
-
     L -->|Tak| Q[Administrator zatwierdza konto]
     Q --> R[Zmiana statusu<br/>na 'Zweryfikowany']
-
     R --> S[System aktywuje pełne<br/>uprawnienia LAWYER]
     S --> T[Prawnik otrzymuje powiadomienie<br/>o akceptacji]
-
     T --> U[Prawnik może zalogować się<br/>do /admin]
     U --> V[Dostęp do panelu<br/>administracyjnego]
-
     V --> W[Prawnik uzupełnia profil<br/>zawodowy LawyerDetails]
     W --> End2([Konto zweryfikowane<br/>i aktywne])
-
     style Start fill:#90EE90
     style End1 fill:#FFB6C1
     style End2 fill:#90EE90

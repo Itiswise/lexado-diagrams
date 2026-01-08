@@ -1,0 +1,28 @@
+flowchart TD
+    Start([Pulpit klienta]) --> A[Kliknięcie 'Utwórz sprawę']
+    A --> B[Wybór lokalizacji]
+    B --> C[Wybór kategorii prawa]
+    C --> D[Dynamiczny formularz OrderForm<br/>dostosowany do kategorii]
+    D --> E[Wypełnienie szczegółów:<br/>- Opis sprawy<br/>- Priorytet<br/>- Język obsługi<br/>- Data rozpoczęcia<br/>- Dokumenty opcjonalnie]
+    E --> F[Zatwierdzenie formularza]
+    F --> G{Kategoria?}
+    G -->|Prawo karne| H[Zapisanie sprawy<br/>Status: PUBLISHED<br/>Moderacja pominięta]
+    G -->|Inne kategorie| I[Zapisanie sprawy<br/>Status: PENDING]
+    H --> J[Prawnicy składają oferty<br/>Typ: FROM_LAWYER]
+    I --> K{Moderacja<br/>administratora}
+    K -->|Odrzucona| L[Status: REJECTED<br/>Powiadomienie]
+    K -->|Zaakceptowana| M[Status: PUBLISHED]
+    L --> N[Możliwość edycji<br/>i ponownego wysłania]
+    N --> D
+    M --> J
+    J --> O[Otrzymanie powiadomień<br/>o nowych ofertach]
+    O --> P[Przegląd i porównanie ofert:<br/>wycena, terminy, kwalifikacje]
+    P --> Q{Wybór oferty}
+    Q -->|Akceptacja| R[Status: IN_PROGRESS<br/>Prawnik przypisany]
+    Q -->|Odrzucenie/Wygaśnięcie| J
+    R --> End2([Współpraca rozpoczęta])
+    style Start fill:#90EE90
+    style End2 fill:#90EE90
+    style G fill:#FFE4B5
+    style K fill:#FFE4B5
+    style Q fill:#FFE4B5

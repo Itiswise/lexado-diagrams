@@ -1,0 +1,9 @@
+flowchart TD
+    Start([Strona główna]) --> B[Wypełnienie formularza:<br/>imię, nazwisko, e-mail, hasło]
+    B --> D[Utworzenie konta<br/>Rola: CLIENT]
+    D --> E[Wysłanie linku<br/>weryfikacyjnego na e-mail]
+    E --> F[Kliknięcie linku<br/>w wiadomości]
+    F --> G([Konto aktywne<br/>Dostęp do pulpitu])
+    G --> H[Opcjonalnie: Uzupełnienie profilu<br/>zdjęcie, preferencje powiadomień]
+    style Start fill:#90EE90
+    style G fill:#90EE90

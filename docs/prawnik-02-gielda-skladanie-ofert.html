@@ -147,42 +147,30 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
     Start([Panel /admin]) --> A[Przegląd giełdy spraw<br/>Status: PUBLISHED]
     A --> B[System wyświetla<br/>sprawy dopasowane:<br/>- Specjalizacja prawnika<br/>- Lokalizacja geograficzna<br/>- Kategoria prawa<br/>- Języki obsługi]
-
     B --> C[Używanie filtrów:<br/>- Kategoria<br/>- Lokalizacja<br/>- Priorytet<br/>- Data utworzenia]
-
     C --> D[System zawęża wyniki]
     D --> E[Prawnik klika<br/>na wybraną sprawę]
-
-    E --> F[Wyświetlenie szczegółów:<br/>- Opis sprawy<br/>- Kategoria i pola specyficzne<br/>- Dokumenty klienta<br/>- Lokalizacja<br/>- Język, priorytet]
-
+    E --> F[Wyświetlenie szczegółów:<br/>- Opis sprawy<br/>- Kategoria i pola specyficzne<br/>- Lokalizacja<br/>- Język, priorytet]
     F --> G{Złożyć ofertę?}
     G -->|Nie| H[Powrót do giełdy]
     H --> A
-
     G -->|Tak| I[Kliknięcie 'Złóż ofertę']
     I --> J[Formularz oferty]
-
     J --> K[Wypełnienie przez prawnika:<br/>- Szczegółowa wycena<br/>- Struktura cenowa<br/>- Proponowane terminy<br/>- Dodatkowe informacje<br/>- Data wygaśnięcia oferty]
-
     K --> L[Utworzenie oferty<br/>Typ: FROM_LAWYER]
     L --> M[Statusy oferty:<br/>client_status: PENDING<br/>lawyer_status: NEW]
-
     M --> N[Klient otrzymuje powiadomienie]
     N --> O[Prawnik śledzi status<br/>w ReceivedOrderResource]
-
     O --> P{Reakcja klienta?}
     P -->|Odrzuca| Q[client_status: REJECTED]
     P -->|Wygasa| R[Status: EXPIRED]
     P -->|Akceptuje| S[Oba statusy: ACCEPTED<br/>Sprawa: IN_PROGRESS]
-
     Q --> End1([Oferta odrzucona])
     R --> End1
     S --> End2([Współpraca rozpoczęta])
-
     style Start fill:#90EE90
     style End1 fill:#FFB6C1
     style End2 fill:#90EE90

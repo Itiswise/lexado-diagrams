@@ -1,0 +1,30 @@
+flowchart TD
+    Start([Panel /admin/settings]) --> A[Wyświetlenie formularza<br/>konfiguracji Settings page]
+    A --> B{Obszar<br/>konfiguracji?}
+    B -->|Kontakt| C[Edycja ustawień kontaktu]
+    C --> D[Ustawienie email odbiorcy<br/>dla formularza kontaktowego]
+    D --> End1([Ustawienia kontaktu zapisane])
+    B -->|Google reCAPTCHA| E[Konfiguracja reCAPTCHA v3]
+    E --> F[Włączenie/wyłączenie reCAPTCHA]
+    F --> G[Ustawienie Site Key i Secret Key]
+    G --> End2([reCAPTCHA skonfigurowana])
+    B -->|Integracja Subiekt123| H[Konfiguracja integracji<br/>z systemem księgowym]
+    H --> I[Przycisk 'Połącz z Subiekt123']
+    I --> J[Test połączenia]
+    J --> K{Połączenie<br/>działa?}
+    K -->|Tak| L[System połączony]
+    K -->|Nie| M[Rozłączenie i ponowna próba]
+    L --> End3([Integracja aktywna])
+    M --> H
+    B -->|Powiadomienia| N[Edycja treści powiadomień]
+    N --> O[Wybór języka PL/EN/UK]
+    O --> P[Szablony dla klientów:<br/>- Email i/lub Aplikacja Database<br/>- Tytuł i treść powiadomienia<br/>- Lista dostępnych zmiennych]
+    P --> Q[Szablony dla prawników:<br/>- Email i/lub Aplikacja Database<br/>- Tytuł i treść powiadomienia<br/>- Lista dostępnych zmiennych]
+    Q --> End4([Powiadomienia zapisane])
+    style Start fill:#90EE90
+    style End1 fill:#90EE90
+    style End2 fill:#90EE90
+    style End3 fill:#90EE90
+    style End4 fill:#90EE90
+    style B fill:#FFE4B5
+    style K fill:#FFE4B5

@@ -147,47 +147,28 @@
 
         <div class="diagram-container">
             <pre class="mermaid">
-
 flowchart TD
     Start([Panel /admin]) --> A[Logowanie z rolą ADMIN<br/>Dostęp do pełnego panelu Filament]
     A --> B[Przejście do<br/>/admin/orders OrderResource]
-
     B --> C[Filtrowanie spraw<br/>według statusu PENDING]
     C --> D[System wyświetla listę<br/>nowych spraw oczekujących]
-
     D --> E[Administrator wybiera<br/>sprawę do przeglądu]
     E --> F[Otwarcie sprawy ViewOrder]
-
-    F --> G[Szczegółowy przegląd:<br/>- Treść opisu zgodność z regulaminem<br/>- Kategoria prawa odpowiedniość<br/>- Załączone dokumenty weryfikacja<br/>- Dane klienta]
-
+    F --> G[Przegląd sprawy]
     G --> H{Decyzja<br/>moderacyjna}
-
     H -->|Zaakceptowana| I[Kliknięcie 'Zaakceptuj'<br/>Zmiana statusu na PUBLISHED]
     H -->|Odrzucona| J[Kliknięcie 'Odrzuć'<br/>Zmiana statusu na REJECTED]
-
     I --> K[System publikuje<br/>sprawę na giełdzie]
     K --> L[Sprawa widoczna dla prawników]
     L --> M[Klient otrzymuje powiadomienie<br/>o publikacji]
-
     M --> End1([Sprawa zaakceptowana<br/>i opublikowana])
-
-    J --> N{Podać powód<br/>odrzucenia?}
-    N -->|Tak| O[Administrator opisuje powód]
-    N -->|Nie| P[Pozostawienie bez szczegółów]
-
-    O --> Q[System zapisuje decyzję<br/>z powodem]
-    P --> Q
-
-    Q --> R[Klient otrzymuje powiadomienie<br/>o odrzuceniu]
-    R --> S[Sprawa przenosi się<br/>do 'Odrzucone sprawy']
-
-    S --> End2([Sprawa odrzucona])
-
+    J --> N[Klient otrzymuje powiadomienie<br/>o odrzuceniu]
+    N --> O[Klient może edytować sprawę<br/>i wysłać ponownie]
+    O --> End2([Sprawa odrzucona])
     style Start fill:#90EE90
     style End1 fill:#90EE90
     style End2 fill:#FFB6C1
     style H fill:#FFE4B5
-    style N fill:#FFE4B5
             </pre>
         </div>
 
